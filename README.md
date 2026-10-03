@@ -47,16 +47,16 @@ the in-game **Roster** viewer.
 
 ## 🛡️ The four factions
 
-**The Concord**: magic and machine in balance. *Order, ambition, and the throne that binds them.*
+**The Concord**: magic and machine in balance. Blue aether crystals in gold armatures, Gothic plate, and a senate of many houses and many races. *Order, ambition, and the throne that binds them.*
 <img src="assets/concord_roster.jpg" alt="Concord unit portraits" width="100%" />
 
-**The Directive**: technology and discipline. Goggled pike blocks, rifles, cannon and iron constructs.
+**The Directive**: technology and discipline. Every soldier is issued the same kit, stamped from one die and marked with the brass gear-wheel. Pike blocks, shield lines, rifles and iron constructs.
 <img src="assets/directive_roster.jpg" alt="Directive unit portraits" width="100%" />
 
-**The Fervent**: magic, volatile and proud. *Emotion as weapon. Faith as armor.*
+**The Fervent**: magic, volatile and proud. Their rune tattoos hold and channel their power, and their armor is partial because their skin carries the magic. *Emotion as weapon. Faith as armor.*
 <img src="assets/fervent_roster.jpg" alt="Fervent unit portraits" width="100%" />
 
-**The Forewarned**: dark and experimental. *Outcasts who remember how the world almost ended.*
+**The Forewarned**: dark and experimental. Blackened iron, eagle-beast helms that hide every face, and a violet glow. *Outcasts who remember how the world almost ended.*
 <img src="assets/forewarned_roster.jpg" alt="Forewarned unit portraits" width="100%" />
 
 ## 🖼️ Concept art
