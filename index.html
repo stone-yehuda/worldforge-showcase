@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Worldforge, a science-fantasy RTS</title>
+<meta name="description" content="Gallery for Worldforge, an original science-fantasy real-time strategy game built in Godot 4: the four factions, base building, armies, field battles, sieges and concept art.">
+<meta property="og:title" content="Worldforge, a science-fantasy RTS">
+<meta property="og:description" content="Four factions, base building, formation battles and sieges, in an original RTS built in Godot 4.">
+<meta property="og:image" content="https://stone-yehuda.github.io/worldforge-showcase/assets/banner.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15110c; --ink-2:#1d1811; --seam:#3a2f20;
+  --parchment:#ece3d0; --faded:#a99e88; --brass:#cfa85a;
+  --concord:#e2b23f; --directive:#5c9fe0; --fervent:#e8582f; --forewarned:#a866ee;
+  --display:"Cinzel",Georgia,serif; --body:"Spectral",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--ink);color:var(--parchment);font:18px/1.65 var(--body)}
+img{display:block;width:100%;height:auto}
+a{color:var(--brass)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* masthead */
+.banner img{max-height:60vh;object-fit:cover}
+nav{position:sticky;top:0;z-index:10;background:rgba(21,17,12,.94);border-bottom:1px solid var(--seam)}
+nav .wrap{display:flex;gap:28px;align-items:baseline;overflow-x:auto;white-space:nowrap;padding-top:14px;padding-bottom:14px}
+nav a{font-family:var(--display);font-size:.82rem;letter-spacing:.06em;text-decoration:none;color:var(--faded)}
+nav a:hover{color:var(--parchment)}
+nav a.home{color:var(--brass);font-weight:700;font-size:.95rem}
+.intro{padding:56px 0 8px;max-width:44em}
+.intro p{margin:0 0 1em}
+.intro .lede{font-size:1.35rem;line-height:1.5}
+.intro .note{color:var(--faded);font-size:.95rem}
+
+/* sections */
+section{padding:72px 0 0}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.15;margin:0 0 10px;color:var(--brass)}
+h3{font-family:var(--display);font-weight:600;font-size:1.15rem;margin:0 0 4px}
+.sub{color:var(--faded);max-width:44em;margin:0 0 28px}
+figure{margin:0}
+figure img{cursor:zoom-in;background:var(--ink-2)}
+figcaption{font-size:.92rem;color:var(--faded);padding:8px 0 0;line-height:1.45}
+figcaption b{color:var(--parchment);font-weight:600}
+.grid{display:grid;gap:22px}
+.grid>*,.faction>*{min-width:0}
+.two{grid-template-columns:repeat(2,1fr)}
+.three{grid-template-columns:repeat(3,1fr)}
+.lead{grid-template-columns:2fr 1fr}
+.lead .stack{display:grid;gap:22px;align-content:start}
+.sheet{margin-bottom:30px}
+
+/* factions: the four colours are the game's own team colours */
+.faction{display:grid;grid-template-columns:minmax(220px,1fr) 3fr;gap:28px;align-items:center;padding:22px 0 22px 20px;border-left:4px solid var(--fc);margin-bottom:18px}
+.faction h3{color:var(--fc);font-size:1.3rem}
+.faction p{margin:0;font-size:.98rem}
+.faction em{display:block;color:var(--faded);margin-top:6px}
+.concord{--fc:var(--concord)} .directive{--fc:var(--directive)}
+.fervent{--fc:var(--fervent)} .forewarned{--fc:var(--forewarned)}
+
+/* city progression */
+.picker{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.picker button{font:600 .85rem var(--display);letter-spacing:.04em;padding:9px 16px;background:none;color:var(--faded);border:1px solid var(--seam);border-bottom:3px solid var(--fc);cursor:pointer}
+.picker button:hover{color:var(--parchment)}
+.picker button[aria-pressed="true"]{background:var(--fc);color:var(--ink);border-color:var(--fc)}
+.stages{--fc:var(--concord)}
+.stages figure{border-top:3px solid var(--fc);counter-increment:stage}
+.stages{counter-reset:stage}
+.stages figcaption b::before{content:counter(stage) ". "}
+
+/* battles, grouped by map */
+.map{margin-bottom:40px}
+.map header{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-bottom:12px}
+.map header span{color:var(--faded);font-size:.95rem}
+
+/* closing matter */
+.hood{columns:2;column-gap:48px;padding:0;margin:0;list-style:none;max-width:none}
+.hood li{break-inside:avoid;margin-bottom:16px;font-size:.98rem}
+.hood b{color:var(--brass);font-weight:600}
+footer{margin-top:80px;padding:32px 0 48px;border-top:1px solid var(--seam);color:var(--faded);font-size:.9rem}
+footer p{margin:0 0 8px;max-width:52em}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100vw;height:100vh;color:var(--parchment)}
+dialog::backdrop{background:rgba(10,8,5,.94)}
+.lb{height:100%;display:grid;grid-template-rows:1fr auto;justify-items:center;align-items:center;padding:20px 72px 16px}
+.lb img{width:auto;max-width:100%;max-height:calc(100vh - 120px);cursor:zoom-out}
+.lb p{margin:12px 0 0;max-width:60em;text-align:center;font-size:.95rem;color:var(--faded)}
+.lb button{position:fixed;background:var(--ink-2);color:var(--parchment);border:1px solid var(--seam);font:1.3rem var(--body);width:48px;height:48px;cursor:pointer}
+.lb button:hover{border-color:var(--brass);color:var(--brass)}
+.lb .prev{left:14px;top:50%} .lb .next{right:14px;top:50%} .lb .close{right:14px;top:14px}
+
+@media(max-width:820px){
+  body{font-size:17px}
+  .two,.three,.lead,.faction{grid-template-columns:1fr}
+  .faction{gap:14px}
+  .hood{columns:1}
+  .lb{padding:64px 8px 12px}
+  .lb .prev,.lb .next{top:auto;bottom:10px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="banner"><img src="assets/banner.jpg" alt="Worldforge, a science-fantasy RTS where magic and machine collide" width="1600" height="520"></div>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a class="home" href="#top">Worldforge</a>
+    <a href="#play">In the game</a>
+    <a href="#factions">Factions</a>
+    <a href="#bases">Bases</a>
+    <a href="#armies">Armies</a>
+    <a href="#battles">Battles</a>
+    <a href="#sieges">Sieges</a>
+    <a href="#art">Concept art</a>
+    <a href="#hood">Under the hood</a>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+  <div class="intro">
+    <p class="lede">Worldforge is an original real-time strategy game I'm building in Godot 4, set in a world where magic and technology amplify each other. Enchantment makes engines burn hotter; runes let bullets punch through armor.</p>
+    <p>Four societies each built themselves around one answer to how far that should go, and the uneasy peace between them is cracking.</p>
+    <p class="note">The game's source is private while it's in development. This page is the gallery. Select any image to see it full size.</p>
+  </div>
+
+  <section id="play">
+    <h2>In the game</h2>
+    <p class="sub">Three moments from ordinary play, with the interface on.</p>
+    <div class="grid lead">
+      <figure><img src="assets/ingame_battle.jpg" alt="Two Concord armies collide" width="1600" height="900"><figcaption><b>Battle lines.</b> Squads fight as formations, with shield walls, pikes and shock infantry.</figcaption></figure>
+      <div class="stack">
+        <figure><img loading="lazy" src="assets/ingame_cavalry.jpg" alt="Dragoons charge a pike block" width="1600" height="900"><figcaption><b>Counters.</b> Dragoons charge a pike block. A braced line breaks a cavalry charge.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/ingame_base_raid.jpg" alt="A Fervent warband raids a Concord base" width="1600" height="900"><figcaption><b>Raid.</b> A Fervent warband hits a Concord town while its workers are still gathering.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="factions">
+    <h2>The four factions</h2>
+    <p class="sub">Each faction's colour here is its colour on the battlefield, so the rest of the page reads the same way the game does.</p>
+
+    <div class="faction concord">
+      <div><h3>The Concord</h3><p>Magic and machine in balance. Blue aether crystals in gold armatures, Gothic plate, and a senate of many houses and many races.<em>Order, ambition, and the throne that binds them.</em></p></div>
+      <figure><img loading="lazy" src="assets/concord_roster.jpg" alt="Concord units and hero" width="1600" height="260" data-cap="The Concord: five units and a hero."></figure>
+    </div>
+    <div class="faction directive">
+      <div><h3>The Directive</h3><p>Technology and discipline. Every soldier is issued the same kit, stamped from one die and marked with the brass gear-wheel. Pike blocks, shield lines, rifles and iron constructs.</p></div>
+      <figure><img loading="lazy" src="assets/directive_roster.jpg" alt="Directive units and hero" width="1600" height="260" data-cap="The Directive: five units and a hero."></figure>
+    </div>
+    <div class="faction fervent">
+      <div><h3>The Fervent</h3><p>Magic, volatile and proud. Their rune tattoos hold and channel their power, and their armor is partial because their skin carries the magic.<em>Emotion as weapon. Faith as armor.</em></p></div>
+      <figure><img loading="lazy" src="assets/fervent_roster.jpg" alt="Fervent units and hero" width="1600" height="260" data-cap="The Fervent: five units and a hero."></figure>
+    </div>
+    <div class="faction forewarned">
+      <div><h3>The Forewarned</h3><p>Dark and experimental. Blackened iron, eagle-beast helms that hide every face, and a violet glow.<em>Outcasts who remember how the world almost ended.</em></p></div>
+      <figure><img loading="lazy" src="assets/forewarned_roster.jpg" alt="Forewarned units and hero" width="1600" height="260" data-cap="The Forewarned: five units and a hero."></figure>
+    </div>
+  </section>
+
+  <section id="bases">
+    <h2>Building a base</h2>
+    <p class="sub">A base grows through three stages over a match: an open settlement, a town behind a timber palisade, and a capital ringed in stone. Pick a faction to see its three.</p>
+
+    <div class="picker" role="group" aria-label="Faction">
+      <button class="concord" data-faction="concord" aria-pressed="true">The Concord</button>
+      <button class="directive" data-faction="directive" aria-pressed="false">The Directive</button>
+      <button class="fervent" data-faction="fervent" aria-pressed="false">The Fervent</button>
+      <button class="forewarned" data-faction="forewarned" aria-pressed="false">The Forewarned</button>
+    </div>
+    <div class="grid three stages sheet" id="stages" aria-live="polite">
+      <figure><img loading="lazy" src="assets/city_concord_stage1.jpg" alt="Concord settlement" width="1600" height="900"><figcaption><b>Settlement.</b> Town hall, houses, barracks and archery range, with the first squads mustered.</figcaption></figure>
+      <figure><img loading="lazy" src="assets/city_concord_stage2.jpg" alt="Concord palisade town" width="1600" height="900"><figcaption><b>Palisade town.</b> More buildings and a larger garrison, enclosed by a timber wall with gates and corner towers.</figcaption></figure>
+      <figure><img loading="lazy" src="assets/city_concord_stage3.jpg" alt="Concord fortified capital" width="1600" height="900"><figcaption><b>Fortified capital.</b> Stone ramparts with wall towers around a dense city and a full army.</figcaption></figure>
+    </div>
+
+    <p class="sub">The same buildings and walls laid out side by side, from the in-game Roster viewer.</p>
+    <figure class="sheet"><img loading="lazy" src="assets/roster_buildings.jpg" alt="Buildings of all four factions by tier" width="1600" height="435"><figcaption><b>Buildings by tier.</b> Concord and Directive on top, Fervent and Forewarned below.</figcaption></figure>
+    <figure class="sheet"><img loading="lazy" src="assets/roster_walls.jpg" alt="Wall sets of all four factions" width="1600" height="830"><figcaption><b>Walls.</b> Palisades in tier I, then stone ramparts, towers, stairs and gates in tier II.</figcaption></figure>
+  </section>
+
+  <section id="armies">
+    <h2>Armies and heroes</h2>
+    <p class="sub">Rosters are built per faction, not shared and recoloured. Also from the Roster viewer.</p>
+    <figure class="sheet"><img loading="lazy" src="assets/roster_armies.jpg" alt="Army rosters of all four factions" width="1600" height="397"><figcaption><b>Armies.</b> Each faction fills unit slots (spear, shield line, ranged, cavalry, siege and more) across three tiers, with a capstone unit.</figcaption></figure>
+    <figure class="sheet"><img loading="lazy" src="assets/roster_heroes.jpg" alt="Hero halls and heroes of all four factions" width="1600" height="948"><figcaption><b>Heroes.</b> Each faction fields three commanders from its own hero hall.</figcaption></figure>
+  </section>
+
+  <section id="battles">
+    <h2>Field battles</h2>
+    <p class="sub">Full armies on each of the four maps: infantry and constructs in the centre, ranged ranks and siege engines behind. These scenes and the sieges below are staged in the engine with the interface hidden.</p>
+
+    <div class="map">
+      <header><h3>Brasswater Concourse</h3><span>Concord against Directive</span></header>
+      <div class="grid three">
+        <figure><img loading="lazy" src="assets/battle_brasswater_overview.jpg" alt="Concord and Directive armies on Brasswater Concourse" width="1600" height="900"><figcaption><b>The field.</b> Two lines meet beside the river.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/battle_brasswater_gunline.jpg" alt="View from behind the Directive line" width="1600" height="900"><figcaption><b>Behind the Directive line.</b> Cannon and ranged ranks behind the melee, the big constructs in the middle of it.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/battle_brasswater_cavalry_flank.jpg" alt="The battle seen from the flank" width="1600" height="900"><figcaption><b>From the flank.</b> Siege engines drawn up behind the infantry.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="map">
+      <header><h3>Heartwood Wilds</h3><span>Concord against Fervent</span></header>
+      <div class="grid two">
+        <figure><img loading="lazy" src="assets/battle_heartwood_overview.jpg" alt="Concord and Fervent armies on Heartwood Wilds" width="1600" height="900"><figcaption><b>The field.</b> A Fervent warhost wraps around the Concord line.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/battle_heartwood_concord_ranks.jpg" alt="View from behind the Concord ranks" width="1600" height="900"><figcaption><b>Behind the Concord ranks.</b> Archers and siege engines in depth, looking toward the clash.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="map">
+      <header><h3>Ironroot Deeps</h3><span>Directive against Forewarned</span></header>
+      <div class="grid two">
+        <figure><img loading="lazy" src="assets/battle_ironroot_overview.jpg" alt="Directive and Forewarned armies on Ironroot Deeps" width="1600" height="900"><figcaption><b>The field.</b> Directive ranks curve around a Forewarned legion.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/battle_ironroot_melee_line.jpg" alt="View down the engaged line on Ironroot Deeps" width="1600" height="900"><figcaption><b>Down the line of contact.</b> The Directive's iron constructs in the thick of it.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="map">
+      <header><h3>The Vigil Scar</h3><span>Fervent against Forewarned</span></header>
+      <div class="grid two">
+        <figure><img loading="lazy" src="assets/battle_vigil_scar_overview.jpg" alt="Fervent and Forewarned armies on the Vigil Scar" width="1600" height="900"><figcaption><b>The field.</b> Fervent warbands advance across the violet ash wastes.</figcaption></figure>
+        <figure><img loading="lazy" src="assets/battle_vigil_scar_bombard_line.jpg" alt="Close view of the fight on the Vigil Scar" width="1600" height="900"><figcaption><b>Where the lines meet.</b> A Forewarned gun crew in the foreground, the Fervent line beyond.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="sieges">
+    <h2>Sieges</h2>
+    <p class="sub">Walls can be manned, gates can be held, and attackers bring siege towers to the rampart.</p>
+    <div class="grid two">
+      <figure><img loading="lazy" src="assets/siege_grand_assault_wide.jpg" alt="An army assaults a brick fortress" width="1600" height="900"><figcaption><b>The assault.</b> Concord infantry and two siege towers close on a Directive fortress while its garrison lines the wall.</figcaption></figure>
+      <figure><img loading="lazy" src="assets/siege_gate_clash_heroic.jpg" alt="Fighting at the fortress gate" width="1600" height="900"><figcaption><b>At the gate.</b> A construct holds the gateway as the towers come up on either side.</figcaption></figure>
+      <figure><img loading="lazy" src="assets/siege_rampart_overlook.jpg" alt="Defenders on the rampart walkway" width="1600" height="900"><figcaption><b>On the wall.</b> The garrison on the walkway, with the stair up to it on the right.</figcaption></figure>
+      <figure><img loading="lazy" src="assets/siege_obsidian_citadel.jpg" alt="A Fervent warband attacks a Forewarned citadel" width="1600" height="900"><figcaption><b>The black citadel.</b> A Fervent warband storms Forewarned walls on the Vigil Scar.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="art">
+    <h2>Concept art</h2>
+    <p class="sub">The world the game is set in, and the look the 3D art is working toward.</p>
+    <figure><img loading="lazy" src="assets/concept_art.jpg" alt="Six pieces of Worldforge concept art" width="1936" height="674"></figure>
+  </section>
+
+  <section id="hood">
+    <h2>Under the hood</h2>
+    <ul class="hood">
+      <li><b>Asymmetric factions.</b> Rosters are defined per faction, so each slot means something different for each side, and some factions deliberately leave a slot empty.</li>
+      <li><b>Squad combat.</b> Units fight in formations. An armor and ward damage model, knockback, braced pikes and charge impacts run on a fixed 30 Hz simulation.</li>
+      <li><b>Enemy AI</b> runs its own economy, builds a base and sends attack waves.</li>
+      <li><b>Headless match simulator</b> plays whole AI-vs-AI matches without a renderer, for balance sweeps across seeds.</li>
+      <li><b>Heroes, tech trees and siege</b> sit on top of a Tech / Magic / Fusion research system.</li>
+      <li><b>Built with a multi-agent workflow.</b> Claude Code, Codex and Gemini work on one repo under shared rules for claiming tasks, reviewing each other's work and running worktrees.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Godot 4.7, GDScript, Forward+ renderer. In active development.</p>
+    <p>Concept art and unit portraits were generated locally with FLUX.1, then reviewed, curated and edited. Only approved pieces appear here. In-game 3D models are partly original and partly adapted from CC0 packs by <a href="https://kenney.nl">Kenney</a>, <a href="https://kaylousberg.itch.io">KayKit</a> and <a href="https://quaternius.com">Quaternius</a>.</p>
+    <p>© Yehuda Stone. All rights reserved. Images are shared here for portfolio viewing only. <a href="https://github.com/stone-yehuda/worldforge-showcase">This gallery on GitHub</a></p>
+  </footer>
+</main>
+
+<dialog id="lightbox" aria-label="Image viewer">
+  <div class="lb">
+    <img id="lb-img" src="" alt="">
+    <p id="lb-cap"></p>
+    <button class="close" aria-label="Close">×</button>
+    <button class="prev" aria-label="Previous image">‹</button>
+    <button class="next" aria-label="Next image">›</button>
+  </div>
+</dialog>
+
+<script>
+// City progression: one faction's three stages side by side.
+const STAGE_ALT = ["settlement", "palisade town", "fortified capital"];
+const stages = document.getElementById("stages");
+const pickers = document.querySelectorAll(".picker button");
+pickers.forEach(btn => btn.addEventListener("click", () => {
+  const faction = btn.dataset.faction;
+  pickers.forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+  stages.style.setProperty("--fc", `var(--${faction})`);
+  stages.querySelectorAll("img").forEach((img, i) => {
+    img.src = `assets/city_${faction}_stage${i + 1}.jpg`;
+    img.alt = `${btn.textContent.replace("The ", "")} ${STAGE_ALT[i]}`;
+  });
+}));
+
+// Lightbox: every image in the page, in page order.
+const shots = [...document.querySelectorAll("main figure img")];
+const box = document.getElementById("lightbox");
+const boxImg = document.getElementById("lb-img");
+const boxCap = document.getElementById("lb-cap");
+let current = 0;
+
+function show(i) {
+  current = (i + shots.length) % shots.length;
+  const img = shots[current];
+  const caption = img.closest("figure").querySelector("figcaption");
+  boxImg.src = img.src;
+  boxImg.alt = img.alt;
+  boxCap.textContent = caption ? caption.textContent : (img.dataset.cap || img.alt);
+}
+shots.forEach((img, i) => {
+  img.tabIndex = 0;
+  const open = () => { show(i); box.showModal(); };
+  img.addEventListener("click", open);
+  img.addEventListener("keydown", e => { if (e.key === "Enter") open(); });
+});
+box.querySelector(".prev").addEventListener("click", () => show(current - 1));
+box.querySelector(".next").addEventListener("click", () => show(current + 1));
+box.querySelector(".close").addEventListener("click", () => box.close());
+boxImg.addEventListener("click", () => box.close());
+box.addEventListener("click", e => { if (e.target === box || e.target.classList.contains("lb")) box.close(); });
+box.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") show(current - 1);
+  if (e.key === "ArrowRight") show(current + 1);
+});
+</script>
+</body>
+</html>
